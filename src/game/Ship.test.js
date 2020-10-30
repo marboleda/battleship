@@ -22,3 +22,24 @@ describe('Making sure ships are being created with the correct length', () => {
         expect(Ship('destroyer').getLength()).toEqual(2);
     });
 });
+
+
+describe('Check that ships get sunk correctly', () => {
+
+    test('Carrier gets sunk after being hit 5 times', () => {
+        const testShip = Ship('carrier');
+        for (let i = 0; i < 5; i++) {
+            testShip.hit();
+        }
+        expect(testShip.isSunk()).toEqual(true);
+    });
+
+    test('Carrier does NOT get sunk after being hit 3 times', () => {
+        const testShip = Ship('carrier');
+        for (let i = 0; i < 3; i++) {
+            testShip.hit();
+        }
+        expect(testShip.isSunk()).toEqual(false);
+    });
+
+})

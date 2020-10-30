@@ -1,6 +1,8 @@
-const ship = (shipType) => {
+const ship = (shipType, startingCoordinates = [0,0], orientation = 0) => {
+    /* orientation: 0 => horizontal, 1 => vertical */
 
     let length;
+    let timesHit = 0;
 
     switch(shipType) {
         case 'carrier':
@@ -21,7 +23,15 @@ const ship = (shipType) => {
         return length;
     }
 
-    return { getLength }
+    const hit = () => {
+        timesHit++;
+    }
+    
+    const isSunk = () => {
+        return length === timesHit;
+    }
+
+    return { getLength, hit, isSunk }
 
 }
 
