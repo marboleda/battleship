@@ -23,6 +23,14 @@ const ship = (shipType, startingCoordinates = [0,0], orientation = 0) => {
         return length;
     }
 
+    const getOrientation = () => {
+        return orientation;
+    }
+
+    const getPlacementCoordinates = () => {
+        return startingCoordinates;
+    }
+
     const hit = () => {
         timesHit++;
     }
@@ -31,7 +39,7 @@ const ship = (shipType, startingCoordinates = [0,0], orientation = 0) => {
         return length === timesHit;
     }
 
-    return { getLength, hit, isSunk }
+    return { getLength, getOrientation, getPlacementCoordinates, hit, isSunk }
 
 }
 
