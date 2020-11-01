@@ -7,30 +7,30 @@ const gameBoard = () => {
     const ships = [];
 
     const placeShip = (ship) => {
-        const xCoord = ship.getCoordinates()[0];
-        const yCoord = ship.getCoordinate()[1];
+        const xCoord = ship.getPlacementCoordinates()[0];
+        const yCoord = ship.getPlacementCoordinates()[1];
         const orientation = ship.getOrientation();
 
         if (orientation === 0) {
-            if (ship.getLength() + ship.xCoord > 7) {
+            if (ship.getLength() + xCoord > 7) {
                 console.log('Ship goes off the grid');
-                return;
+                return null;
             }
             for (let i = 0; i < ship.getLength(); i++) {
                 if (gameBoardState[yCoord][xCoord+i] == 1) {
                     console.log('Something is in the way of the ship');
-                    return;
+                    return null;
                 }
             }
         } else { //i.e. ship orientation is 1, or vertical
-            if (ship.getLength() + ship.yCoord > 7) {
+            if (ship.getLength() + yCoord > 7) {
                 console.log('Ship goes off the grid');
-                return;
+                return null;
             }
             for (let i = 0; i < ship.getLength(); i++) {
                 if (gameBoardState[yCoord+i][xCoord] == 1) {
                     console.log('Something is in the way of the ship');
-                    return;
+                    return null;
                 }
             }
         }
@@ -47,7 +47,16 @@ const gameBoard = () => {
         }
     }
 
-    return { gameBoardState, placeShip }
+    
+    const getGameboardState = () => {
+        return gameBoardState;
+    }
+
+    const getShips = () => {
+        return ships;
+    }
+
+    return { getGameboardState, placeShip, getShips }
 }
 
 export default gameBoard;
