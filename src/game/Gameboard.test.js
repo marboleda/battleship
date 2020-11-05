@@ -62,4 +62,19 @@ describe('Check that ship placement works correctly', () => {
         expect(testGameboard.getShips()).toEqual([testShip]);
     });
 
+    test('Placing ship vertically on valid spot on a blank board', () => {
+        const testShip = Ship('carrier', [0, 0], 1);
+        const testGameboard = Gameboard();
+        testGameboard.placeShip(testShip);
+        expect(testGameboard.getGameboardState()).toEqual([[1,0,0,0,0,0,0,0],
+                                                           [1,0,0,0,0,0,0,0],
+                                                           [1,0,0,0,0,0,0,0],
+                                                           [1,0,0,0,0,0,0,0],
+                                                           [1,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0]]);
+        expect(testGameboard.getShips()).toEqual([testShip]);
+    });
+
 })
