@@ -79,4 +79,23 @@ describe('Check that ship placement works correctly', () => {
         expect(testShip.getCoordinatesOccupied()).toEqual([[0,0],[0,1],[0,2],[0,3],[0,4]]);
     });
 
-})
+});
+
+
+describe('Check that gameboard receives attacks properly', () => {
+    test('Place ship and successfully target it', () => {
+        const testShip = Ship('carrier', [1, 2], 0);
+        const testGameboard = Gameboard(); 
+        testGameboard.placeShip(testShip);
+        testGameboard.receiveAttack([2,2]);
+        expect(testGameboard.getGameboardState()).toEqual([[0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0],
+                                                           [0,1,2,1,1,1,0,0],
+                                                           [0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0]]);
+        expect(testShip.getTimesHit()).toEqual(1);
+    })
+});

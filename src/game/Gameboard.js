@@ -63,7 +63,25 @@ const gameBoard = () => {
         return ships;
     }
 
-    return { getGameboardState, placeShip, getShips }
+    const receiveAttack = (coordinate) => {
+        let shipHit = false;
+
+        ships.forEach((ship) => {
+            ship.getCoordinatesOccupied().forEach((shipCoordinate) => {
+                if (shipCoordinate[0] == coordinate[0] && shipCoordinate[1] == coordinate[1]) {
+                    gameBoardState[coordinate[1]][coordinate[0]] = 2;
+                    ship.hit();
+                    shipHit = true;
+                } 
+            });
+        });
+
+        if(!shipHit) {
+            gameBoardState[coordinate[1]][coordinate[0]] = 3;
+        }
+    }
+
+    return { getGameboardState, placeShip, getShips, receiveAttack }
 }
 
 export default gameBoard;
