@@ -35,16 +35,23 @@ const gameBoard = () => {
             }
         }
         
-        ships.push(ship);
+        //If ship placement is valid
+        const coordinatesOccupiedByShip = [];
+
         if (orientation === 0) {
             for (let i = 0; i < ship.getLength(); i++) {
                 gameBoardState[yCoord][xCoord+i] = 1;
+                coordinatesOccupiedByShip.push([xCoord+i, yCoord]);
             }
         } else {
             for (let i = 0; i < ship.getLength(); i++) {
                 gameBoardState[yCoord+i][xCoord] = 1;
+                coordinatesOccupiedByShip.push([xCoord, yCoord+i]);
             }           
         }
+
+        ship.setCoordinatesOccupied(coordinatesOccupiedByShip);
+        ships.push(ship);
     }
 
     

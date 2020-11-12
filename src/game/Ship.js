@@ -3,6 +3,7 @@ const ship = (shipType, startingCoordinates = [0,0], orientation = 0) => {
 
     let length;
     let timesHit = 0;
+    let coordinatesOccupied = [];
 
     switch(shipType) {
         case 'carrier':
@@ -31,6 +32,14 @@ const ship = (shipType, startingCoordinates = [0,0], orientation = 0) => {
         return startingCoordinates;
     }
 
+    const getCoordinatesOccupied = () => {
+        return coordinatesOccupied;
+    }
+
+    const setCoordinatesOccupied = (coordinates) => {
+        coordinatesOccupied = coordinates;
+    }
+
     const hit = () => {
         timesHit++;
     }
@@ -39,7 +48,7 @@ const ship = (shipType, startingCoordinates = [0,0], orientation = 0) => {
         return length === timesHit;
     }
 
-    return { getLength, getOrientation, getPlacementCoordinates, hit, isSunk }
+    return { getLength, getOrientation, getPlacementCoordinates, getCoordinatesOccupied, setCoordinatesOccupied, hit, isSunk }
 
 }
 

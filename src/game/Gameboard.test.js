@@ -60,6 +60,7 @@ describe('Check that ship placement works correctly', () => {
                                                            [0,0,0,0,0,0,0,0],
                                                            [0,0,0,0,0,0,0,0]]);
         expect(testGameboard.getShips()).toEqual([testShip]);
+        expect(testShip.getCoordinatesOccupied()).toEqual([[1,2],[2,2],[3,2],[4,2],[5,2]])
     });
 
     test('Placing ship vertically on valid spot on a blank board', () => {
@@ -75,6 +76,7 @@ describe('Check that ship placement works correctly', () => {
                                                            [0,0,0,0,0,0,0,0],
                                                            [0,0,0,0,0,0,0,0]]);
         expect(testGameboard.getShips()).toEqual([testShip]);
+        expect(testShip.getCoordinatesOccupied()).toEqual([[0,0],[0,1],[0,2],[0,3],[0,4]]);
     });
 
 })
