@@ -99,3 +99,30 @@ describe('Check that gameboard receives attacks properly', () => {
         expect(testShip.getTimesHit()).toEqual(1);
     })
 });
+
+
+describe('Check that allShipsAreSunk check works correctly', () => {
+
+    test('Check fails if you place one ship on board and do not wipe it out', () => {
+        const testShip = Ship('carrier', [1, 2], 0);
+        const testGameboard = Gameboard(); 
+        testGameboard.placeShip(testShip);
+        testGameboard.receiveAttack([1,2]);
+        testGameboard.receiveAttack([2,2]);
+        testGameboard.receiveAttack([3,2]);
+        testGameboard.receiveAttack([4,2]);
+        expect(testGameboard.allShipsAreSunk()).toEqual(false);
+    });
+
+    test('Check fails if you place one ship on board and wipe it out', () => {
+        const testShip = Ship('carrier', [1, 2], 0);
+        const testGameboard = Gameboard(); 
+        testGameboard.placeShip(testShip);
+        testGameboard.receiveAttack([1,2]);
+        testGameboard.receiveAttack([2,2]);
+        testGameboard.receiveAttack([3,2]);
+        testGameboard.receiveAttack([4,2]);
+        testGameboard.receiveAttack([5,2]);
+        expect(testGameboard.allShipsAreSunk()).toEqual(true);
+    });
+});

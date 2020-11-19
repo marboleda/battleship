@@ -42,4 +42,4 @@ describe('Check that ships get sunk correctly', () => {
         expect(testShip.isSunk()).toEqual(false);
     });
 
-})
+});

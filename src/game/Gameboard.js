@@ -81,7 +81,19 @@ const gameBoard = () => {
         }
     }
 
-    return { getGameboardState, placeShip, getShips, receiveAttack }
+    const allShipsAreSunk = () => {
+        let allShipsAreSunk = true;
+
+        ships.forEach((ship) => {
+            if (!ship.isSunk()) {
+                allShipsAreSunk = false;
+            }
+        });
+
+        return allShipsAreSunk;
+    }
+
+    return { getGameboardState, placeShip, getShips, receiveAttack, allShipsAreSunk }
 }
 
 export default gameBoard;
