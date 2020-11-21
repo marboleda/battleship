@@ -1,5 +1,3 @@
-import Ship from './Ship';
-
 const gameBoard = () => {
 
     const gameBoardState = [...Array(8)].map(() => Array(8).fill(0));
