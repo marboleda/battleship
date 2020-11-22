@@ -22,7 +22,7 @@ const grid = (props) => {
 
     return (
         <div className = 'grid'>
-            <h2>{(playerType == 'h') ? 'You' : 'Enemy'}</h2>
+            <h2>{(playerType === 'h') ? 'You' : 'Enemy'}</h2>
             <Grid>
                 {[...Array(64).keys()].map((gridIndex) => {
                     return <Cell id={`${playerType}${gridIndex}`}></Cell>
