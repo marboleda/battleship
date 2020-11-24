@@ -1,4 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const ShipDisplay = styled.div`
+    margin-top: 10px;
+    margin-bottom: 10px;
+`
+
+const ShipCell = styled.div`
+    width: 1.5vw;
+    height: 1.5vh;
+    background-color: black;
+    border-style: solid;
+    border-color: white;
+    border-width: 0.5px;
+`
 
 const shipComponent = (props) => {
 
@@ -27,16 +42,16 @@ const shipComponent = (props) => {
         }
 
         for (let i = 0; i < shipLength; i++) {
-            shipSquares.push(<div className='ship-cell' />);
+            shipSquares.push(<ShipCell className='ship-cell' />);
         }
 
         return shipSquares;
     }
 
     return (
-        <div className='shipDisplay'>
+        <ShipDisplay className='shipDisplay'>
             {createShip(shipType)}
-        </div>
+        </ShipDisplay>
     )
 };
 
