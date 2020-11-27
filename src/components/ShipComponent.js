@@ -7,8 +7,8 @@ const ShipDisplay = styled.div`
 `
 
 const ShipCell = styled.div`
-    width: 1.5vw;
-    height: 1.5vh;
+    width: 3vw;
+    height: 3vh;
     background-color: black;
     border-style: solid;
     border-color: white;
@@ -49,7 +49,10 @@ const shipComponent = (props) => {
     }
 
     return (
-        <ShipDisplay className='shipDisplay'>
+        <ShipDisplay
+            draggable
+            className='shipDisplay' 
+        >
             {createShip(shipType)}
         </ShipDisplay>
     )
