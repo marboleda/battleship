@@ -8,14 +8,16 @@ describe('Test attackEnemy function', () => {
         const testGameboard = Gameboard();
         const humanPlayer = Player('human');
         humanPlayer.attackEnemy(testGameboard, [2,3]);
-        expect(testGameboard.getGameboardState()).toEqual([[0,0,0,0,0,0,0,0],
-                                                           [0,0,0,0,0,0,0,0],
-                                                           [0,0,0,0,0,0,0,0],
-                                                           [0,0,3,0,0,0,0,0],
-                                                           [0,0,0,0,0,0,0,0],
-                                                           [0,0,0,0,0,0,0,0],
-                                                           [0,0,0,0,0,0,0,0],
-                                                           [0,0,0,0,0,0,0,0]]);       
+        expect(testGameboard.getGameboardState()).toEqual([[0,0,0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0,0,0],
+                                                           [0,0,3,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0,0,0],
+                                                           [0,0,0,0,0,0,0,0,0,0]]);       
     });
 
 });

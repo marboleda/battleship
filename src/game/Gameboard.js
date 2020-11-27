@@ -1,6 +1,6 @@
 const gameBoard = () => {
 
-    const gameBoardState = [...Array(8)].map(() => Array(8).fill(0));
+    const gameBoardState = [...Array(10)].map(() => Array(10).fill(0));
     // 0 indicates unfilled, 1 indicates filled with ship (not hit), 2 indicates hit with ship, 3 indicates hit without ship
     const ships = [];
 
