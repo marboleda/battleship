@@ -17,7 +17,7 @@ const ShipCell = styled.div`
 
 const shipComponent = (props) => {
 
-    const { shipType } = props;
+    const { drag, shipType } = props;
 
     const createShip = (type) => {
         let shipLength;
@@ -51,6 +51,7 @@ const shipComponent = (props) => {
     return (
         <ShipDisplay
             draggable
+            onDrag={() => {drag(shipType)}}
             className='shipDisplay' 
         >
             {createShip(shipType)}

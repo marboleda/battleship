@@ -1,22 +1,25 @@
 import React from 'react';
 import ShipComponent from './ShipComponent'
 
-const menu = () => {
+const menu = (props) => {
+
+    const { drag } = props;
+
     return (
         <div className='menu'>
-            <ShipComponent shipType='carrier' />
-            <ShipComponent shipType='battleship' />
-            <ShipComponent shipType='battleship' />
-            <ShipComponent shipType='cruiser' />
-            <ShipComponent shipType='cruiser' />
-            <ShipComponent shipType='cruiser' />
-            <ShipComponent shipType='submarine' />
-            <ShipComponent shipType='submarine' />
-            <ShipComponent shipType='submarine' />
-            <ShipComponent shipType='destroyer' />
-            <ShipComponent shipType='destroyer' />
-            <ShipComponent shipType='destroyer' />
-            <ShipComponent shipType='destroyer' />
+            <ShipComponent drag={drag} shipType='carrier' />
+            <ShipComponent drag={drag} shipType='battleship' />
+            <ShipComponent drag={drag} shipType='battleship' />
+            <ShipComponent drag={drag} shipType='cruiser' />
+            <ShipComponent drag={drag} shipType='cruiser' />
+            <ShipComponent drag={drag} shipType='cruiser' />
+            <ShipComponent drag={drag} shipType='submarine' />
+            <ShipComponent drag={drag} shipType='submarine' />
+            <ShipComponent drag={drag} shipType='submarine' />
+            <ShipComponent drag={drag} shipType='destroyer' />
+            <ShipComponent drag={drag} shipType='destroyer' />
+            <ShipComponent drag={drag} shipType='destroyer' />
+            <ShipComponent drag={drag} shipType='destroyer' />
         </div>
     )
 };
