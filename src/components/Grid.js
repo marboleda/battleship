@@ -19,7 +19,7 @@ border-width: 0.5px;
 
 const grid = (props) => {
 
-    const { playerType } = props;
+    const { playerType, drop } = props;
 
 
     return (
@@ -27,7 +27,15 @@ const grid = (props) => {
             <h2>{(playerType === 'h') ? 'You' : 'Enemy'}</h2>
             <Grid>
                 {[...Array(100).keys()].map((gridIndex) => {
-                    return <Cell id={`${playerType}${gridIndex}`}></Cell>
+                    return <Cell 
+                                id={`${playerType}${gridIndex}`}
+                                onDragOver={(e) => {e.preventDefault()}}
+                                onDrop={(e) => {
+                                                e.preventDefault();
+                                                drop(playerType, [ (gridIndex % 10), Number(gridIndex.toString().substring(0,1)) ])
+                                                }}
+                            >
+                            </Cell>
                 })}
             </Grid>
         </div>
