@@ -10,7 +10,7 @@ const gameBoard = () => {
         const orientation = ship.getOrientation();
 
         if (orientation === 0) {
-            if (ship.getLength() + xCoord > 7) {
+            if (ship.getLength() + xCoord > 10) {
                 console.log('Ship goes off the grid');
                 return null;
             }
@@ -21,7 +21,7 @@ const gameBoard = () => {
                 }
             }
         } else { //i.e. ship orientation is 1, or vertical
-            if (ship.getLength() + yCoord > 7) {
+            if (ship.getLength() + yCoord > 10) {
                 console.log('Ship goes off the grid');
                 return null;
             }
