@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ShipDisplay = styled.div`
+    display: flex;
+    flex-direction: row;
     margin-top: 10px;
     margin-bottom: 10px;
-`
+`;
 
 const ShipCell = styled.div`
     width: 3vw;
@@ -13,7 +15,7 @@ const ShipCell = styled.div`
     border-style: solid;
     border-color: white;
     border-width: 0.5px;
-`
+`;
 
 const shipComponent = (props) => {
 

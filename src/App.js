@@ -21,7 +21,9 @@ const App = () => {
   const [selectedShip, setSelectedShip] = useState('');
   const [shipOrientation, setShipOrientation] = useState(0);
   const [playerGameboard, setPlayerGameboard] = useState(Gameboard());
+  const [playerGameboardState, setPlayerGameboardState] = useState(playerGameboard.getGameboardState());
   const [computerGameboard, setComputerGameboard] = useState(Gameboard());
+  const [computerGameboardState, setComputerGameboardState] = useState(computerGameboard.getGameboardState());
 
   const handleDragShip = (shipType) => {
     setSelectedShip(shipType);
@@ -35,6 +37,7 @@ const App = () => {
       updatedGameboard = _.cloneDeep(playerGameboard);
       updatedGameboard.placeShip(ship);
       setPlayerGameboard(updatedGameboard);
+      setPlayerGameboardState(playerGameboard.getGameboardState());
       console.log(playerGameboard.getGameboardState());
     } 
     //We are not supposed to be dropping ships on the computer's grid, so no else statement
@@ -49,14 +52,16 @@ const App = () => {
       <Game id="game">
         <Grid 
           playerType="h"
-          drop={handleDropShip} 
+          drop={handleDropShip}
+          gameboard={playerGameboardState}
         />
         <Menu 
           drag={handleDragShip}
         />
         <Grid 
           playerType="c"
-          drop={handleDropShip} 
+          drop={handleDropShip}
+          gameboard={computerGameboardState}
         />
       </Game>
     </div>
