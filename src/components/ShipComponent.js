@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const ShipDisplay = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: ${props => props.orientation === 0 ? "row" : "column"};
     margin-top: 10px;
     margin-bottom: 10px;
 `;
@@ -17,9 +17,11 @@ const ShipCell = styled.div`
     border-width: 0.5px;
 `;
 
+
 const shipComponent = (props) => {
 
-    const { drag, shipType } = props;
+    const { drag, shipType, shipId, orientation, click } = props;
+
 
     const createShip = (type) => {
         let shipLength;
@@ -54,6 +56,8 @@ const shipComponent = (props) => {
         <ShipDisplay
             draggable
             onDrag={() => {drag(shipType)}}
+            orientation={orientation}
+            onClick={() => {click(shipId, orientation === 1 ? 0 : 1)}}
             className='shipDisplay' 
         >
             {createShip(shipType)}
