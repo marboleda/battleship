@@ -18,20 +18,22 @@ const Game = styled.div`
 
 const App = () => {
 
-  const [selectedShip, setSelectedShip] = useState('');
+  const [selectedShipType, setSelectedShipType] = useState('');
+  const [currentShipId, setCurrentShipId] = useState(0);
   const [shipOrientations, setShipOrientations] = useState([0,0,0,0,0]);
   const [playerGameboard, setPlayerGameboard] = useState(Gameboard());
   const [playerGameboardState, setPlayerGameboardState] = useState(playerGameboard.getGameboardState());
   const [computerGameboard, setComputerGameboard] = useState(Gameboard());
   const [computerGameboardState, setComputerGameboardState] = useState(computerGameboard.getGameboardState());
 
-  const handleDragShip = (shipType) => {
-    setSelectedShip(shipType);
+  const handleDragShip = (shipType, shipId) => {
+    setSelectedShipType(shipType);
+    setCurrentShipId(shipId);
   }
 
-  const handleDropShip = (playerType, coordinates) => {
+  const handleDropShip = (playerType, coordinates, shipId) => {
     let updatedGameboard;
-    const ship = Ship(selectedShip, coordinates, 0);
+    const ship = Ship(selectedShipType, coordinates, shipOrientations[shipId]);
 
     if (playerType === 'h') {
       updatedGameboard = _.cloneDeep(playerGameboard);
@@ -42,7 +44,7 @@ const App = () => {
     } 
     //We are not supposed to be dropping ships on the computer's grid, so no else statement
 
-    setSelectedShip('');
+    setSelectedShipType('');
   }
 
   const handleClickShip = (shipId, newOrientation) => {
@@ -59,6 +61,7 @@ const App = () => {
           playerType="h"
           drop={handleDropShip}
           gameboard={playerGameboardState}
+          currentShipId={currentShipId}
         />
         <Menu 
           drag={handleDragShip}
@@ -69,6 +72,7 @@ const App = () => {
           playerType="c"
           drop={handleDropShip}
           gameboard={computerGameboardState}
+          currentShipId={currentShipId}
         />
       </Game>
     </div>

@@ -55,7 +55,7 @@ const shipComponent = (props) => {
     return (
         <ShipDisplay
             draggable
-            onDrag={() => {drag(shipType)}}
+            onDrag={() => {drag(shipType, shipId)}}
             orientation={orientation}
             onClick={() => {click(shipId, orientation === 1 ? 0 : 1)}}
             className='shipDisplay' 

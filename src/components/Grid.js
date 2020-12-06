@@ -20,7 +20,7 @@ const Cell = styled.div`
 
 const grid = (props) => {
 
-    const { playerType, drop, gameboard } = props;
+    const { playerType, drop, gameboard, currentShipId } = props;
 
 
     return (
@@ -35,7 +35,7 @@ const grid = (props) => {
                                 onDragOver={(e) => {e.preventDefault()}}
                                 onDrop={(e) => {
                                                 e.preventDefault();
-                                                drop(playerType, [ xCoord, yCoord ])
+                                                drop(playerType, [ xCoord, yCoord ], currentShipId)
                                                 }}
                                                 color={(gameboard[yCoord][xCoord] === 1) ? "black" : "white"}
                             >
