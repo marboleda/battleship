@@ -20,7 +20,8 @@ const App = () => {
 
   const [selectedShipType, setSelectedShipType] = useState('');
   const [currentShipId, setCurrentShipId] = useState(0);
-  const [shipOrientations, setShipOrientations] = useState([0,0,0,0,0]);
+  const [shipOrientations, setShipOrientations] = useState(Array(5).fill(0));
+  const [shipPlaced, setShipPlaced] = useState(Array(5).fill(false));
   const [playerGameboard, setPlayerGameboard] = useState(Gameboard());
   const [playerGameboardState, setPlayerGameboardState] = useState(playerGameboard.getGameboardState());
   const [computerGameboard, setComputerGameboard] = useState(Gameboard());
@@ -33,14 +34,17 @@ const App = () => {
 
   const handleDropShip = (playerType, coordinates, shipId) => {
     let updatedGameboard;
+    let updatedShipsPlacedArray;
     const ship = Ship(selectedShipType, coordinates, shipOrientations[shipId]);
 
-    if (playerType === 'h') {
+    if (playerType === 'h' && shipPlaced[shipId] === false) {
       updatedGameboard = _.cloneDeep(playerGameboard);
+      updatedShipsPlacedArray = [...shipPlaced];
       updatedGameboard.placeShip(ship);
+      updatedShipsPlacedArray[shipId] = true;
       setPlayerGameboard(updatedGameboard);
       setPlayerGameboardState(playerGameboard.getGameboardState());
-      console.log(playerGameboard.getGameboardState());
+      setShipPlaced(updatedShipsPlacedArray);
     } 
     //We are not supposed to be dropping ships on the computer's grid, so no else statement
 
@@ -67,6 +71,7 @@ const App = () => {
           drag={handleDragShip}
           orientations={shipOrientations}
           clickShip={handleClickShip}
+          shipOnPlayerBoard={shipPlaced}
         />
         <Grid 
           playerType="c"

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ShipDisplay = styled.div`
-    display: flex;
+    display: ${props => props.onBoard === false ? "flex" : "none"};
     flex-direction: ${props => props.orientation === 0 ? "row" : "column"};
     margin-top: 10px;
     margin-bottom: 10px;
@@ -20,7 +20,7 @@ const ShipCell = styled.div`
 
 const shipComponent = (props) => {
 
-    const { drag, shipType, shipId, orientation, click } = props;
+    const { drag, shipType, shipId, orientation, click, onBoard } = props;
 
 
     const createShip = (type) => {
@@ -57,6 +57,7 @@ const shipComponent = (props) => {
             draggable
             onDrag={() => {drag(shipType, shipId)}}
             orientation={orientation}
+            onBoard={onBoard}
             onClick={() => {click(shipId, orientation === 1 ? 0 : 1)}}
             className='shipDisplay' 
         >
