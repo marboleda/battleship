@@ -16,7 +16,7 @@ const Cell = styled.div`
     border-width: 0.5px;
     background-color: ${props => props.color}; 
     :hover {
-        background-color: ${props => ((props.isPlayerTurn === true) && (props.playerType === 'c')) ? '#D3D3D3' : 'white'}
+        background-color: ${props => ((props.isPlayerTurn === true) && (props.playerType === 'c')) ? '#D3D3D3' : (props.color)}
     }
 `;
 
