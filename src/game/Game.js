@@ -7,6 +7,15 @@ const game = () => {
     const playerGameboard = new Gameboard();
     const enemyGameboard = new Gameboard();
 
+    const getPlayerGameboard = () => {
+        return playerGameboard;
+    }
+
+    const getEnemyGameboard = () => {
+        return enemyGameboard;
+    }
+
+    return { getPlayerGameboard, getEnemyGameboard}
 }
 
 export default game;

@@ -3,6 +3,7 @@ import './App.css';
 import Grid from './components/Grid';
 import Menu from './components/Menu';
 import Gameboard from './game/Gameboard';
+import Game from './game/Game';
 import Ship from './game/Ship';
 import styled from 'styled-components';
 const _ = require('lodash');
@@ -18,13 +19,14 @@ const Game = styled.div`
 
 const App = () => {
 
+  const [game, setGame] = useState(Game());
   const [selectedShipType, setSelectedShipType] = useState('');
   const [currentShipId, setCurrentShipId] = useState(0);
   const [shipOrientations, setShipOrientations] = useState(Array(5).fill(0));
   const [shipPlaced, setShipPlaced] = useState(Array(5).fill(false));
-  const [playerGameboard, setPlayerGameboard] = useState(Gameboard());
+  const [playerGameboard, setPlayerGameboard] = useState(game.getPlayerGameboard());
   const [playerGameboardState, setPlayerGameboardState] = useState(playerGameboard.getGameboardState());
-  const [computerGameboard, setComputerGameboard] = useState(Gameboard());
+  const [computerGameboard, setComputerGameboard] = useState(game.getComputerGameboard());
   const [computerGameboardState, setComputerGameboardState] = useState(computerGameboard.getGameboardState());
 
   const handleDragShip = (shipType, shipId) => {
