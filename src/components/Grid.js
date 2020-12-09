@@ -37,7 +37,7 @@ const grid = (props) => {
                                                 e.preventDefault();
                                                 drop(playerType, [ xCoord, yCoord ], currentShipId)
                                                 }}
-                                                color={(gameboard[yCoord][xCoord] === 1) ? "black" : "white"}
+                                                color={(gameboard[yCoord][xCoord] === 1 && playerType === 'h') ? "black" : "white"}
                             >
                             </Cell>
                 })}

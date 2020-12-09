@@ -21,8 +21,6 @@ const game = () => {
     enemyGameboard.placeShip(submarine);
     enemyGameboard.placeShip(destroyer);
 
-    console.log(enemyGameboard.getGameboardState());
-
     const getPlayerGameboard = () => {
         return playerGameboard;
     }
