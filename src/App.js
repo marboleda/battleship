@@ -8,7 +8,7 @@ import Ship from './game/Ship';
 import styled from 'styled-components';
 const _ = require('lodash');
 
-const Game = styled.div`
+const GameComponent = styled.div`
   display: flex;
   flex-direction: row;
   width: 90vw;
@@ -26,7 +26,7 @@ const App = () => {
   const [shipPlaced, setShipPlaced] = useState(Array(5).fill(false));
   const [playerGameboard, setPlayerGameboard] = useState(game.getPlayerGameboard());
   const [playerGameboardState, setPlayerGameboardState] = useState(playerGameboard.getGameboardState());
-  const [computerGameboard, setComputerGameboard] = useState(game.getComputerGameboard());
+  const [computerGameboard, setComputerGameboard] = useState(game.getEnemyGameboard());
   const [computerGameboardState, setComputerGameboardState] = useState(computerGameboard.getGameboardState());
 
   const handleDragShip = (shipType, shipId) => {
@@ -62,7 +62,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>Battleship</h1>
-      <Game id="game">
+      <GameComponent id="game">
         <Grid 
           playerType="h"
           drop={handleDropShip}
@@ -81,7 +81,7 @@ const App = () => {
           gameboard={computerGameboardState}
           currentShipId={currentShipId}
         />
-      </Game>
+      </GameComponent>
     </div>
   );
 }
