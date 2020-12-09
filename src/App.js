@@ -28,6 +28,18 @@ const App = () => {
   const [playerGameboardState, setPlayerGameboardState] = useState(playerGameboard.getGameboardState());
   const [computerGameboard, setComputerGameboard] = useState(game.getEnemyGameboard());
   const [computerGameboardState, setComputerGameboardState] = useState(computerGameboard.getGameboardState());
+  const [isPlayerTurn, setIsPlayerTurn] = useState(false);
+  const [isComputerTurn, setIsComputerTurn] = useState(false);
+
+  const allShipsArePlaced = () => {
+    shipPlaced.forEach((placed) => {
+      if (!placed) {
+        return false;
+      }
+    });
+
+    return true;
+  }
 
   const handleDragShip = (shipType, shipId) => {
     setSelectedShipType(shipType);
@@ -37,6 +49,7 @@ const App = () => {
   const handleDropShip = (playerType, coordinates, shipId) => {
     let updatedGameboard;
     let updatedShipsPlacedArray;
+
     const ship = Ship(selectedShipType, coordinates, shipOrientations[shipId]);
 
     if (playerType === 'h' && shipPlaced[shipId] === false) {
@@ -51,6 +64,11 @@ const App = () => {
     //We are not supposed to be dropping ships on the computer's grid, so no else statement
 
     setSelectedShipType('');
+
+    if (allShipsArePlaced()) {
+      setIsPlayerTurn(true);
+    }
+
   }
 
   const handleClickShip = (shipId, newOrientation) => {
@@ -68,6 +86,7 @@ const App = () => {
           drop={handleDropShip}
           gameboard={playerGameboardState}
           currentShipId={currentShipId}
+          isPlayerTurn={isPlayerTurn}
         />
         <Menu 
           drag={handleDragShip}
@@ -80,6 +99,7 @@ const App = () => {
           drop={handleDropShip}
           gameboard={computerGameboardState}
           currentShipId={currentShipId}
+          isPlayerTurn={isPlayerTurn}
         />
       </GameComponent>
     </div>

@@ -15,12 +15,15 @@ const Cell = styled.div`
     border-style: solid;
     border-width: 0.5px;
     background-color: ${props => props.color}; 
+    :hover {
+        background-color: ${props => ((props.isPlayerTurn === true) && (props.playerType === 'c')) ? '#D3D3D3' : 'white'}
+    }
 `;
 
 
 const grid = (props) => {
 
-    const { playerType, drop, gameboard, currentShipId } = props;
+    const { playerType, drop, gameboard, currentShipId, isPlayerTurn } = props;
 
 
     return (
@@ -37,7 +40,9 @@ const grid = (props) => {
                                                 e.preventDefault();
                                                 drop(playerType, [ xCoord, yCoord ], currentShipId)
                                                 }}
-                                                color={(gameboard[yCoord][xCoord] === 1 && playerType === 'h') ? "black" : "white"}
+                                color={(gameboard[yCoord][xCoord] === 1 && playerType === 'h') ? "black" : "white"}
+                                isPlayerTurn={isPlayerTurn}
+                                playerType={playerType}
                             >
                             </Cell>
                 })}
