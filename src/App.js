@@ -31,22 +31,13 @@ const App = () => {
   const [isPlayerTurn, setIsPlayerTurn] = useState(false);
   const [isComputerTurn, setIsComputerTurn] = useState(false);
 
-  const allShipsArePlaced = () => {
-    shipPlaced.forEach((placed) => {
-      if (!placed) {
-        return false;
-      }
-    });
-
-    return true;
-  }
-
   const handleDragShip = (shipType, shipId) => {
     setSelectedShipType(shipType);
     setCurrentShipId(shipId);
   }
 
   const handleDropShip = (playerType, coordinates, shipId) => {
+    console.log(shipId);
     let updatedGameboard;
     let updatedShipsPlacedArray;
 
@@ -60,14 +51,11 @@ const App = () => {
       setPlayerGameboard(updatedGameboard);
       setPlayerGameboardState(playerGameboard.getGameboardState());
       setShipPlaced(updatedShipsPlacedArray);
+      setIsPlayerTurn(updatedShipsPlacedArray.every((placed) => {return placed === true }))
     } 
     //We are not supposed to be dropping ships on the computer's grid, so no else statement
 
     setSelectedShipType('');
-
-    if (allShipsArePlaced()) {
-      setIsPlayerTurn(true);
-    }
 
   }
 
