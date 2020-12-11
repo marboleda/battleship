@@ -37,7 +37,6 @@ const App = () => {
   }
 
   const handleDropShip = (playerType, coordinates, shipId) => {
-    console.log(shipId);
     let updatedGameboard;
     let updatedShipsPlacedArray;
 
@@ -65,6 +64,15 @@ const App = () => {
     setShipOrientations(updatedOrientations);
   }
 
+  const handleClickEnemyGrid = (coordinates, gridType, isPlayerTurn) => {
+    if (isPlayerTurn && gridType === 'c') {
+      const newComputerGameboard = _.cloneDeep(computerGameboard);
+      newComputerGameboard.receiveAttack(coordinates);
+      setComputerGameboard(newComputerGameboard);
+      setComputerGameboardState(newComputerGameboard.getGameboardState());
+    }
+  }
+
   return (
     <div className="App">
       <h1>Battleship</h1>
@@ -75,6 +83,7 @@ const App = () => {
           gameboard={playerGameboardState}
           currentShipId={currentShipId}
           isPlayerTurn={isPlayerTurn}
+          clickEnemyGrid={handleClickEnemyGrid}
         />
         <Menu 
           drag={handleDragShip}
@@ -88,6 +97,7 @@ const App = () => {
           gameboard={computerGameboardState}
           currentShipId={currentShipId}
           isPlayerTurn={isPlayerTurn}
+          clickEnemyGrid={handleClickEnemyGrid}
         />
       </GameComponent>
     </div>

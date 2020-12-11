@@ -23,7 +23,7 @@ const Cell = styled.div`
 
 const grid = (props) => {
 
-    const { playerType, drop, gameboard, currentShipId, isPlayerTurn } = props;
+    const { playerType, drop, gameboard, currentShipId, isPlayerTurn, clickEnemyGrid } = props;
 
 
     return (
@@ -43,6 +43,7 @@ const grid = (props) => {
                                 color={(gameboard[yCoord][xCoord] === 1 && playerType === 'h') ? "black" : "white"}
                                 isPlayerTurn={isPlayerTurn}
                                 playerType={playerType}
+                                onClick={(e) => clickEnemyGrid([xCoord, yCoord], playerType, isPlayerTurn)}
                             >
                             </Cell>
                 })}
