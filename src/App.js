@@ -65,7 +65,18 @@ const App = () => {
   }
 
   const takeComputerTurn = () => {
-
+    let move = Math.floor(Math.random() * 100);
+    let moveX = (move % 10);
+    let moveY = (move < 10) ? 0 : Number(move.toString().substring(0,1));
+    const newPlayerGameboard = _.cloneDeep(playerGameboard);
+    let attackIsValid = newPlayerGameboard.receiveAttack([moveX, moveY]);
+    while (!attackIsValid) {
+      move = Math.floor(Math.random() * 100);
+      moveX = (move % 10);    
+      moveY = (move < 10) ? 0 : Number(move.toString().substring(0,1)); 
+      attackIsValid = newPlayerGameboard.receiveAttack([moveX, moveY]);
+    }
+    setIsPlayerTurn(true);
   }
 
   const handleClickEnemyGrid = (coordinates, gridType, isPlayerTurn) => {
