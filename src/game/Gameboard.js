@@ -62,8 +62,8 @@ const gameBoard = () => {
     }
 
     const receiveAttack = (coordinate) => {
-        if (gameBoardState[coordinate[1]][coordinate[2]] === 2 ||
-            gameBoardState[coordinate[1]][coordinate[2]] === 3) {
+        if (gameBoardState[coordinate[1]][coordinate[0]] === 2 ||
+            gameBoardState[coordinate[1]][coordinate[0]] === 3) {
                 return false;
         }
         
