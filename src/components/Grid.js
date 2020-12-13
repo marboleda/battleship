@@ -20,10 +20,23 @@ const Cell = styled.div`
     }
 `;
 
+const generateCellColor = (gameboard, playerType, x, y) => {
+    if (gameboard[y][x] === 1 && playerType === 'h') {
+        return "black";
+    } else if (gameboard[y][x] === 2) {
+        return "green";
+    } else if (gameboard[y][x] === 3) {
+        return "red";
+    } else {
+        return "white";
+    }
+}
 
 const grid = (props) => {
 
     const { playerType, drop, gameboard, currentShipId, isPlayerTurn, clickEnemyGrid } = props;
+
+
 
 
     return (
@@ -40,7 +53,7 @@ const grid = (props) => {
                                                 e.preventDefault();
                                                 drop(playerType, [ xCoord, yCoord ], currentShipId)
                                                 }}
-                                color={(gameboard[yCoord][xCoord] === 1 && playerType === 'h') ? "black" : "white"}
+                                color={generateCellColor(gameboard, playerType, xCoord,yCoord)}
                                 isPlayerTurn={isPlayerTurn}
                                 playerType={playerType}
                                 onClick={(e) => clickEnemyGrid([xCoord, yCoord], playerType, isPlayerTurn)}
