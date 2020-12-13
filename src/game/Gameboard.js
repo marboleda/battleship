@@ -62,6 +62,11 @@ const gameBoard = () => {
     }
 
     const receiveAttack = (coordinate) => {
+        if (gameBoardState[coordinate[1]][coordinate[2]] === 2 ||
+            gameBoardState[coordinate[1]][coordinate[2]] === 3) {
+                return false;
+        }
+        
         let shipHit = false;
 
         ships.forEach((ship) => {
@@ -77,6 +82,8 @@ const gameBoard = () => {
         if(!shipHit) {
             gameBoardState[coordinate[1]][coordinate[0]] = 3;
         }
+
+        return true;
     }
 
     const allShipsAreSunk = () => {

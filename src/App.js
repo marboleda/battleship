@@ -64,14 +64,23 @@ const App = () => {
     setShipOrientations(updatedOrientations);
   }
 
+  const takeComputerTurn = () => {
+
+  }
+
   const handleClickEnemyGrid = (coordinates, gridType, isPlayerTurn) => {
     if (isPlayerTurn && gridType === 'c') {
       const newComputerGameboard = _.cloneDeep(computerGameboard);
-      newComputerGameboard.receiveAttack(coordinates);
-      setComputerGameboard(newComputerGameboard);
-      setComputerGameboardState(newComputerGameboard.getGameboardState());
+      const attackIsValid = newComputerGameboard.receiveAttack(coordinates);
+      if (attackIsValid) {
+        setComputerGameboard(newComputerGameboard);
+        setComputerGameboardState(newComputerGameboard.getGameboardState());
+        setIsPlayerTurn(false);
+        takeComputerTurn();
+      }
     }
   }
+
 
   return (
     <div className="App">
