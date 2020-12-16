@@ -29,11 +29,15 @@ const game = () => {
         return enemyGameboard;
     }
 
-    const initGame = () => {
-
+    const playerIsWinner = () => {
+        return enemyGameboard.allShipsAreSunk();
     }
 
-    return { getPlayerGameboard, getEnemyGameboard}
+    const computerIsWinner = () => {
+        return playerGameboard.allShipsAreSunk();
+    }
+
+    return { getPlayerGameboard, getEnemyGameboard, playerIsWinner, computerIsWinner}
 }
 
 export default game;

@@ -16,7 +16,9 @@ const Cell = styled.div`
     border-width: 0.5px;
     background-color: ${props => props.color}; 
     :hover {
-        background-color: ${props => ((props.isPlayerTurn === true) && (props.playerType === 'c')) ? '#D3D3D3' : (props.color)}
+        background-color: ${props => ((props.isPlayerTurn === true) && (props.playerType === 'c') && (props.isGameOver === false)) 
+                                        ? '#D3D3D3' 
+                                        : (props.color)}
     }
 `;
 
@@ -34,7 +36,7 @@ const generateCellColor = (gameboard, playerType, x, y) => {
 
 const grid = (props) => {
 
-    const { playerType, drop, gameboard, currentShipId, isPlayerTurn, clickEnemyGrid } = props;
+    const { playerType, drop, gameboard, currentShipId, isPlayerTurn, isGameOver, clickEnemyGrid } = props;
 
 
 
@@ -55,6 +57,7 @@ const grid = (props) => {
                                                 }}
                                 color={generateCellColor(gameboard, playerType, xCoord,yCoord)}
                                 isPlayerTurn={isPlayerTurn}
+                                isGameOver={isGameOver}
                                 playerType={playerType}
                                 onClick={(e) => clickEnemyGrid([xCoord, yCoord], playerType, isPlayerTurn)}
                             >

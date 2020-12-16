@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import Grid from './components/Grid';
 import Menu from './components/Menu';
-import Gameboard from './game/Gameboard';
 import Game from './game/Game';
 import Ship from './game/Ship';
 import styled from 'styled-components';
@@ -29,7 +28,8 @@ const App = () => {
   const [computerGameboard, setComputerGameboard] = useState(game.getEnemyGameboard());
   const [computerGameboardState, setComputerGameboardState] = useState(computerGameboard.getGameboardState());
   const [isPlayerTurn, setIsPlayerTurn] = useState(false);
-  const [isComputerTurn, setIsComputerTurn] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
+
 
   const handleDragShip = (shipType, shipId) => {
     setSelectedShipType(shipType);
@@ -76,7 +76,12 @@ const App = () => {
       moveY = (move < 10) ? 0 : Number(move.toString().substring(0,1)); 
       attackIsValid = newPlayerGameboard.receiveAttack([moveX, moveY]);
     }
-    setIsPlayerTurn(true);
+    if (newPlayerGameboard.allShipsAreSunk()) {
+      //end game
+      setIsGameOver(true);
+    } else {
+      setIsPlayerTurn(true);
+    }
   }
 
   const handleClickEnemyGrid = (coordinates, gridType, isPlayerTurn) => {
@@ -87,7 +92,12 @@ const App = () => {
         setComputerGameboard(newComputerGameboard);
         setComputerGameboardState(newComputerGameboard.getGameboardState());
         setIsPlayerTurn(false);
-        takeComputerTurn();
+        if (newComputerGameboard.allShipsAreSunk()) {
+          //end game
+          setIsGameOver(true);
+        } else {
+          takeComputerTurn();
+        }
       }
     }
   }
@@ -103,6 +113,7 @@ const App = () => {
           gameboard={playerGameboardState}
           currentShipId={currentShipId}
           isPlayerTurn={isPlayerTurn}
+          isGameOver={isGameOver}
           clickEnemyGrid={handleClickEnemyGrid}
         />
         <Menu 
@@ -117,6 +128,7 @@ const App = () => {
           gameboard={computerGameboardState}
           currentShipId={currentShipId}
           isPlayerTurn={isPlayerTurn}
+          isGameOver={isGameOver}
           clickEnemyGrid={handleClickEnemyGrid}
         />
       </GameComponent>
