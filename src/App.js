@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Grid from './components/Grid';
 import Menu from './components/Menu';
-import Game from './game/Game';
+import Gameboard from './game/Gameboard'
 import Ship from './game/Ship';
 import styled from 'styled-components';
 const _ = require('lodash');
@@ -15,17 +15,53 @@ const GameComponent = styled.div`
   margin: 0 auto;
 `;
 
-
 const App = () => {
 
-  const [game, setGame] = useState(Game());
+  const generateRandomEnemyGameboard = () => {
+    let randomEnemyGameboard = Gameboard();
+    let randomCoords = [0, 0];
+    let randomOrientation = 0;
+    let validPlacement = false;
+
+    [...Array(5).keys()].forEach((index) => {
+      while (!validPlacement) {
+        randomCoords = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
+        randomOrientation = Math.round(Math.random()) //Generate 0 or 1
+        if (index === 0) {
+          if (randomEnemyGameboard.placeShip(Ship('carrier', randomCoords, randomOrientation)) !== null) {
+            validPlacement = true;
+          }
+        } else if (index === 1) {
+          if (randomEnemyGameboard.placeShip(Ship('battleship', randomCoords, randomOrientation)) !== null) {
+            validPlacement = true;
+          }
+        } else if (index === 2) {
+          if (randomEnemyGameboard.placeShip(Ship('cruiser', randomCoords, randomOrientation)) !== null) {
+            validPlacement = true;
+          }
+        } else if (index === 3) {
+          if (randomEnemyGameboard.placeShip(Ship('submarine', randomCoords, randomOrientation)) !== null) {
+            validPlacement = true;
+          }
+        } else { //index must be 4
+          if (randomEnemyGameboard.placeShip(Ship('destroyer', randomCoords, randomOrientation)) !== null) {
+            validPlacement = true;
+          }
+        }
+      }
+      validPlacement = false;
+    });
+
+    return randomEnemyGameboard;
+  }
+
   const [selectedShipType, setSelectedShipType] = useState('');
   const [currentShipId, setCurrentShipId] = useState(0);
   const [shipOrientations, setShipOrientations] = useState(Array(5).fill(0));
   const [shipPlaced, setShipPlaced] = useState(Array(5).fill(false));
-  const [playerGameboard, setPlayerGameboard] = useState(game.getPlayerGameboard());
+  const [playerGameboard, setPlayerGameboard] = useState(Gameboard());
   const [playerGameboardState, setPlayerGameboardState] = useState(playerGameboard.getGameboardState());
-  const [computerGameboard, setComputerGameboard] = useState(game.getEnemyGameboard());
+  const [computerGameboard, setComputerGameboard] = useState(generateRandomEnemyGameboard());
   const [computerGameboardState, setComputerGameboardState] = useState(computerGameboard.getGameboardState());
   const [isPlayerTurn, setIsPlayerTurn] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
