@@ -15,7 +15,7 @@ const gameBoard = () => {
                 return null;
             }
             for (let i = 0; i < ship.getLength(); i++) {
-                if (gameBoardState[yCoord][xCoord+i] == 1) {
+                if (gameBoardState[yCoord][xCoord+i] === 1) {
                     console.log('Something is in the way of the ship');
                     return null;
                 }
@@ -26,7 +26,7 @@ const gameBoard = () => {
                 return null;
             }
             for (let i = 0; i < ship.getLength(); i++) {
-                if (gameBoardState[yCoord+i][xCoord] == 1) {
+                if (gameBoardState[yCoord+i][xCoord] === 1) {
                     console.log('Something is in the way of the ship');
                     return null;
                 }
