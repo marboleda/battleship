@@ -58,6 +58,7 @@ const App = () => {
   const [selectedShipType, setSelectedShipType] = useState('');
   const [currentShipId, setCurrentShipId] = useState(0);
   const [shipOrientations, setShipOrientations] = useState(Array(5).fill(0));
+  const [selectedCellId, setSelectedCellId] = useState(0);
   const [shipPlaced, setShipPlaced] = useState(Array(5).fill(false));
   const [playerGameboard, setPlayerGameboard] = useState(Gameboard());
   const [playerGameboardState, setPlayerGameboardState] = useState(playerGameboard.getGameboardState());
@@ -72,7 +73,7 @@ const App = () => {
     setCurrentShipId(shipId);
   }
 
-  const handleDropShip = (playerType, coordinates, shipId) => {
+  const handleDropShip = (playerType, coordinates, shipId, cellID) => {
     let updatedGameboard;
     let updatedShipsPlacedArray;
 
@@ -99,6 +100,10 @@ const App = () => {
     const updatedOrientations = [...shipOrientations];
     updatedOrientations[shipId] = newOrientation;
     setShipOrientations(updatedOrientations);
+  }
+
+  const handleClickCell = (cellId) => {
+    setSelectedCellId(cellId);
   }
 
   const takeComputerTurn = () => {
@@ -157,6 +162,7 @@ const App = () => {
           drag={handleDragShip}
           orientations={shipOrientations}
           clickShip={handleClickShip}
+          clickCell={handleClickCell}
           shipOnPlayerBoard={shipPlaced}
         />
         <Grid 

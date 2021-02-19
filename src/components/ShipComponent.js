@@ -20,7 +20,7 @@ const ShipCell = styled.div`
 
 const shipComponent = (props) => {
 
-    const { drag, shipType, shipId, orientation, click, onBoard } = props;
+    const { drag, shipType, shipId, orientation, clickShip, clickCell, onBoard } = props;
 
 
     const createShip = (type) => {
@@ -46,7 +46,10 @@ const shipComponent = (props) => {
         }
 
         for (let i = 0; i < shipLength; i++) {
-            shipSquares.push(<ShipCell className='ship-cell' />);
+            shipSquares.push(<ShipCell 
+                                className='ship-cell' 
+                                onMouseDown={(e) => clickCell(i)}
+                            />);
         }
 
         return shipSquares;
@@ -58,7 +61,7 @@ const shipComponent = (props) => {
             onDrag={() => {drag(shipType, shipId)}}
             orientation={orientation}
             onBoard={onBoard}
-            onClick={() => {click(shipId, orientation === 1 ? 0 : 1)}}
+            onClick={() => {clickShip(shipId, orientation === 1 ? 0 : 1)}}
             className='shipDisplay' 
         >
             {createShip(shipType)}
