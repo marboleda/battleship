@@ -81,11 +81,12 @@ const App = () => {
     if (playerType === 'h' && shipPlaced[shipId] === false) {
       updatedGameboard = _.cloneDeep(playerGameboard);
       updatedShipsPlacedArray = [...shipPlaced];
-      updatedGameboard.placeShip(ship);
-      updatedShipsPlacedArray[shipId] = true;
+      if (updatedGameboard.placeShip(ship) !== null) {
+        updatedShipsPlacedArray[shipId] = true;
+        setShipPlaced(updatedShipsPlacedArray);
+      };
       setPlayerGameboard(updatedGameboard);
       setPlayerGameboardState(playerGameboard.getGameboardState());
-      setShipPlaced(updatedShipsPlacedArray);
       setIsPlayerTurn(updatedShipsPlacedArray.every((placed) => {return placed === true }))
     } 
     //We are not supposed to be dropping ships on the computer's grid, so no else statement
