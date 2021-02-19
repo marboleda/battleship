@@ -73,11 +73,18 @@ const App = () => {
     setCurrentShipId(shipId);
   }
 
-  const handleDropShip = (playerType, coordinates, shipId, cellID) => {
+  const handleDropShip = (playerType, coordinates, shipId, cellId) => {
     let updatedGameboard;
     let updatedShipsPlacedArray;
 
-    const ship = Ship(selectedShipType, coordinates, shipOrientations[shipId]);
+    let modifiedCoordinates = [...coordinates];
+    if (shipOrientations[shipId] === 0) {
+      modifiedCoordinates = [modifiedCoordinates[0]-cellId, modifiedCoordinates[1]];
+    } else { //ship orientation is 1, i.e. vertical
+      modifiedCoordinates = [modifiedCoordinates[0], modifiedCoordinates[1]-cellId];
+    }
+
+    const ship = Ship(selectedShipType, modifiedCoordinates, shipOrientations[shipId]);
 
     if (playerType === 'h' && shipPlaced[shipId] === false) {
       updatedGameboard = _.cloneDeep(playerGameboard);
@@ -157,6 +164,7 @@ const App = () => {
           isPlayerTurn={isPlayerTurn}
           isGameOver={isGameOver}
           clickEnemyGrid={handleClickEnemyGrid}
+          selectedCell={selectedCellId}
         />
         <Menu 
           drag={handleDragShip}
@@ -173,6 +181,7 @@ const App = () => {
           isPlayerTurn={isPlayerTurn}
           isGameOver={isGameOver}
           clickEnemyGrid={handleClickEnemyGrid}
+          selectedCell={selectedCellId}
         />
       </GameComponent>
     </div>

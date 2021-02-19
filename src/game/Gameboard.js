@@ -9,6 +9,8 @@ const gameBoard = () => {
         const yCoord = ship.getPlacementCoordinates()[1];
         const orientation = ship.getOrientation();
 
+        if (xCoord < 0 || yCoord < 0) { return null; }
+
         if (orientation === 0) {
             if (ship.getLength() + xCoord > 10) {
                 console.log('Ship goes off the grid');

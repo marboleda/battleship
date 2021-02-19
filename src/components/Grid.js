@@ -36,7 +36,7 @@ const generateCellColor = (gameboard, playerType, x, y) => {
 
 const grid = (props) => {
 
-    const { playerType, drop, gameboard, currentShipId, isPlayerTurn, isGameOver, clickEnemyGrid } = props;
+    const { playerType, drop, gameboard, currentShipId, isPlayerTurn, isGameOver, clickEnemyGrid, selectedCell } = props;
 
 
 
@@ -53,7 +53,7 @@ const grid = (props) => {
                                 onDragOver={(e) => {e.preventDefault()}}
                                 onDrop={(e) => {
                                                 e.preventDefault();
-                                                drop(playerType, [ xCoord, yCoord ], currentShipId)
+                                                drop(playerType, [ xCoord, yCoord ], currentShipId, selectedCell);
                                                 }}
                                 color={generateCellColor(gameboard, playerType, xCoord,yCoord)}
                                 isPlayerTurn={isPlayerTurn}
